@@ -10,27 +10,39 @@
 
 ## Hai câu hỏi tư duy
 
-### 1. Người dùng cuối có thể tự cài đặt ứng dụng mới vào thiết bị không?
+Câu 1. Người dùng cuối có thể tự cài đặt ứng dụng mới vào thiết bị không?
 
-Thông thường là **không**. Thiết bị nhúng là hệ thống chuyên dụng: firmware được nhà sản xuất nạp sẵn vào bộ nhớ (ROM/Flash) và chỉ làm một số chức năng cố định. Nó thường không có hệ điều hành mở, không có kho ứng dụng và không có giao diện để người dùng cài thêm phần mềm. Người dùng chỉ có thể chọn chế độ hoặc thay đổi thông số trong phạm vi nhà sản xuất cho phép.
+Trong điều kiện sử dụng bình thường: Không.
 
-Có hai ngoại lệ:
+Camera IMOU là thiết bị nhúng chuyên dụng, được thiết kế để làm một nhóm chức năng cố định: quay video, xoay 360°, phát hiện chuyển động, đàm thoại hai chiều, lưu trữ thẻ nhớ/đám mây.
+Thiết bị không có kho ứng dụng và không có hệ điều hành mở cho bên thứ ba, nên người dùng không có cách chính thức để cài thêm phần mềm vào camera.
+Thứ người dùng cài là app Imou Life trên điện thoại. Đây chỉ là phần mềm điều khiển từ xa, không chạy bên trong camera.
+Việc duy nhất người dùng làm được với phần mềm bên trong là cập nhật firmware chính thức do hãng phát hành. Đó là thay phần mềm nền, không phải cài thêm ứng dụng.
 
-- Các thiết bị nhúng cao cấp như Smart TV hay smartwatch chạy hệ điều hành đầy đủ và cho phép cài ứng dụng.
-- Nhà sản xuất có thể cập nhật firmware (ví dụ OTA), nhưng đó vẫn là cập nhật của hãng, không phải người dùng tự cài ứng dụng mới.
+Trường hợp ngoại lệ (cưỡng ép): camera thực chất là một SoC chạy Linux nhúng, nên người có chuyên môn và dụng cụ (cổng UART/JTAG, đọc ghi chip flash) vẫn có thể can thiệp, sửa hoặc thay hẳn firmware bằng bản mã nguồn mở. Tuy nhiên:
 
-### 2. Nếu thay đổi firmware nạp trong vi điều khiển thì hành vi của thiết bị có thay đổi không?
+Thiết bị thường có khóa bootloader, firmware ký số, nên nhiều dòng không cho phép.
+Tài nguyên (RAM, bộ nhớ, CPU) hạn chế, không chạy được ứng dụng nặng.
+Rủi ro cao: hỏng thiết bị, mất bảo hành, mở lỗ hổng bảo mật.
 
-**Có.** Phần cứng (cảm biến, relay, động cơ) chỉ là phần "tay chân", còn firmware quyết định cách vi điều khiển xử lý dữ liệu đầu vào và điều khiển đầu ra. Cùng một phần cứng, nếu đổi firmware thì có thể thay đổi:
+Đây là hành vi can thiệp trái thiết kế, không phải cách dùng của người dùng cuối.
 
-- Thuật toán điều khiển, ví dụ nồi cơm đổi ngưỡng nhiệt và thời gian từng giai đoạn nấu.
-- Chế độ hoạt động và logic xử lý, ví dụ máy giặt thêm chương trình mới hoặc đổi thứ tự giặt → vắt.
-- Cách phản ứng khi có lỗi, ví dụ ngưỡng cảnh báo và ngắt an toàn.
+Câu 2. Nếu thay đổi firmware nạp trong vi điều khiển thì hành vi của thiết bị có thay đổi không?
 
-Giới hạn là phần cứng hiện có: firmware không thể tạo ra chức năng cần cảm biến hoặc cơ cấu chấp hành mà thiết bị không có.
+Có.
 
-Đây chính là đặc điểm cốt lõi của hệ thống nhúng: **phần cứng + firmware = hành vi của thiết bị**.
+Firmware là chương trình điều khiển phần cứng, được xem như “bộ não” của thiết bị. Phần cứng (cảm biến, động cơ, loa, đèn LED) giữ nguyên, nhưng cách chúng được điều khiển thay đổi theo firmware. Ví dụ với camera IMOU, đổi firmware có thể làm thay đổi:
 
+Tính năng: thêm theo dõi chuyển động thông minh, nhận diện người.
+Hiệu năng: tốc độ xoay, độ trễ video, thuật toán nén hình.
+Bảo mật: vá lỗ hổng, thay đổi cách mã hóa và xác thực.
+Kết nối: cách bắt tay Wifi, giao thức truyền dữ liệu.
+Kết luận
+
+Thiết bị nhúng là thiết bị chuyên dụng: chức năng do firmware quyết định, không như máy tính hay điện thoại đa dụng có thể cài app tùy ý. Vì vậy:
+
+Người dùng cuối không tự cài thêm ứng dụng được (trừ khi cưỡng ép can thiệp sâu vào phần cứng và firmware).
+Thay firmware làm thay đổi hành vi thiết bị, vì firmware là thứ quyết định thiết bị làm gì và làm như thế nào.
 
 
 # BT1.3 — Hệ thống đèn đường thông minh
